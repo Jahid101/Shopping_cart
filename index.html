@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="phoneMinusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input type="text" id="phoneBtnValue" class="form-control text-center" value="1">
+                           <button id="phonePlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$<span id="phonePrice">1219</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="phoneCaseMinusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="phoneCaseBtnValue" type="text" class="form-control text-center" value="1">
+                           <button id="phoneCasePlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="phoneCasePrice">59</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$1,278</h5>
+                        <h5>$0</h5>
+                        <h5>$1,278</h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <script>
+      const phonePrice = 1219;
+      const phoneCasePrice = 59;
+
+      // Phone Plus Btn event handler
+      const phonePlusBtn = document.getElementById('phonePlusBtn');
+      phonePlusBtn.addEventListener('click', function(){
+         const phonePlusBtnNumber = getInputNumber('phoneBtnValue');
+
+         updateTextPhonePlus('phoneBtnValue', phonePlusBtnNumber);
+      })
+      // Phone Minus Btn event handler
+      const phoneMinusBtn = document.getElementById('phoneMinusBtn');
+      phoneMinusBtn.addEventListener('click', function(){
+         const phoneMinusBtnNumber = getInputNumber('phoneBtnValue');
+
+         updateTextPhoneMinus('phoneBtnValue', phoneMinusBtnNumber);
+      })
+
+      // Phone Case Plus Btn event handler
+      const phoneCasePlusBtn = document.getElementById('phoneCasePlusBtn');
+      phoneCasePlusBtn.addEventListener('click', function(){
+         const phoneCasePlusBtnNumber = getInputNumber('phoneCaseBtnValue');
+
+         updateTextPhoneCasePlus('phoneCaseBtnValue', phoneCasePlusBtnNumber);
+      })
+      // Phone Case Minus Btn event handler
+      const phoneCaseMinusBtn = document.getElementById('phoneCaseMinusBtn');
+      phoneCaseMinusBtn.addEventListener('click', function(){
+         const phoneCaseMinusBtnNumber = getInputNumber('phoneCaseBtnValue');
+
+         updateTextPhoneCaseMinus('phoneCaseBtnValue', phoneCaseMinusBtnNumber);
+      })
+
+      //Input Reader
+      function getInputNumber(id){
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
+
+        //Phone value
+        function updateTextPhonePlus(id, id2){
+            const current = document.getElementById(id).value;
+            const total = id2 + 1;
+            document.getElementById(id).value = total;
+            document.getElementById('phonePrice').innerText = total * phonePrice;
+        }
+        function updateTextPhoneMinus(id, id2){
+            const current = document.getElementById(id).value;
+            const total = id2 - 1;
+            document.getElementById(id).value = total;
+            document.getElementById('phonePrice').innerText = total * phonePrice;
+        }
+
+        //phone case value
+        function updateTextPhoneCasePlus(id, id2){
+            const current = document.getElementById(id).value;
+            const total = id2 + 1;
+            document.getElementById(id).value = total;
+            document.getElementById('phoneCasePrice').innerText = total * phoneCasePrice;
+        }
+        function updateTextPhoneCaseMinus(id, id2){
+            const current = document.getElementById(id).value;
+            const total = id2 - 1;
+            document.getElementById(id).value = total;
+            document.getElementById('phoneCasePrice').innerText = total * phoneCasePrice;
+        }
+   </script>
+</body>
+
+</html>
