@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$<span id="subTotal">1,278</span></h5>
+                        <h5>$15</h5>
+                        <h5>$<span id="total">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -80,13 +80,17 @@
    <script>
       const phonePrice = 1219;
       const phoneCasePrice = 59;
-
+      const tax = 15;
+      document.getElementById('total').innerText = 1293;
       // Phone Plus Btn event handler
       const phonePlusBtn = document.getElementById('phonePlusBtn');
       phonePlusBtn.addEventListener('click', function(){
          const phonePlusBtnNumber = getInputNumber('phoneBtnValue');
 
          updateTextPhonePlus('phoneBtnValue', phonePlusBtnNumber);
+
+         subtotal();
+
       })
       // Phone Minus Btn event handler
       const phoneMinusBtn = document.getElementById('phoneMinusBtn');
@@ -94,6 +98,8 @@
          const phoneMinusBtnNumber = getInputNumber('phoneBtnValue');
 
          updateTextPhoneMinus('phoneBtnValue', phoneMinusBtnNumber);
+
+         subtotal();
       })
 
       // Phone Case Plus Btn event handler
@@ -102,6 +108,9 @@
          const phoneCasePlusBtnNumber = getInputNumber('phoneCaseBtnValue');
 
          updateTextPhoneCasePlus('phoneCaseBtnValue', phoneCasePlusBtnNumber);
+
+         subtotal();
+         
       })
       // Phone Case Minus Btn event handler
       const phoneCaseMinusBtn = document.getElementById('phoneCaseMinusBtn');
@@ -109,11 +118,19 @@
          const phoneCaseMinusBtnNumber = getInputNumber('phoneCaseBtnValue');
 
          updateTextPhoneCaseMinus('phoneCaseBtnValue', phoneCaseMinusBtnNumber);
+
+         subtotal();
+
       })
 
       //Input Reader
       function getInputNumber(id){
             const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
+        function getInputTextAsNumber(id){
+            const amount = document.getElementById(id).innerText;
             const amountNumber = parseFloat(amount);
             return amountNumber;
         }
@@ -145,7 +162,13 @@
             document.getElementById(id).value = total;
             document.getElementById('phoneCasePrice').innerText = total * phoneCasePrice;
         }
+        function subtotal(){
+         document.getElementById('subTotal').innerText = getInputTextAsNumber('phonePrice') + getInputTextAsNumber('phoneCasePrice');
+
+         document.getElementById('total').innerText = getInputTextAsNumber('subTotal') + tax;
+        }
    </script>
+   
 </body>
 
 </html>
